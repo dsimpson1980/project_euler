@@ -35,3 +35,14 @@ def gen_primes():
             del D[q]
 
         q += 1
+
+
+def prime_factors(x):
+    factors, d = {}, 2
+    while d <= x:
+        if x % d == 0:
+            x /= d
+            factors[d] = factors.get(d, 0) + 1
+        else:
+            d += 1
+    return factors

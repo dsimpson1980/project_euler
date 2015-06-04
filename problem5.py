@@ -6,15 +6,7 @@ Problem 5
 What is the smallest positive number that is evenly divisible by all of the
 numbers from 1 to 20?"""
 
-def prime_factors(x):
-    factors, d = {}, 2
-    while d <= x:
-        if x % d == 0:
-            x /= d
-            factors[d] = factors.get(d, 0) + 1
-        else:
-            d += 1
-    return factors
+from tools import prime_factors
 
 biggest_factor = {}
 for n in range(1, 21):
