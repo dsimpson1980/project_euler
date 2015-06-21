@@ -38,6 +38,8 @@ def gen_primes():
 
 
 def prime_factors(x):
+    if x == 1:
+        return {1: 1}
     factors, d = {}, 2
     while d <= x:
         if x % d == 0:
