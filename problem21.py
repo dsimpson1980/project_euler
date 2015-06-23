@@ -11,27 +11,8 @@ and 110; therefore d(220) = 284. The proper divisors of 284 are 1, 2, 4, 71 and
 
 Evaluate the sum of all the amicable numbers under 10000."""
 
-from itertools import chain, combinations
 
-from tools import prime_factors
-
-def divisor_generator(n):
-    factors = prime_factors(n)
-    factors = [(k, v) for k, v in factors.iteritems()]
-    nfactors = len(factors)
-    f = [0] * nfactors
-    while True:
-        yield reduce(lambda x, y: x*y, [factors[x][0]**f[x]
-                                        for x in range(nfactors)], 1)
-        i = 0
-        while True:
-            f[i] += 1
-            if f[i] <= factors[i][1]:
-                break
-            f[i] = 0
-            i += 1
-            if i >= nfactors:
-                return
+from tools import divisor_generator
 
 def sum_divisors(n):
     divisors = [d for d in divisor_generator(n)]
