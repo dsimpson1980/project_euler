@@ -66,3 +66,26 @@ def divisor_generator(n):
             i += 1
             if i >= nfactors:
                 return
+
+class unique_element:
+    def __init__(self, value, count):
+        self.value = value
+        self.count = count
+
+def permutations(list_unique, result_list, d):
+    if d < 0:
+        yield tuple(result_list)
+    else:
+        for i in list_unique:
+            if i.count > 0:
+                result_list[d] = i.value
+                i.count -= 1
+                for g in permutations(list_unique, result_list, d - 1):
+                    yield g
+                i.count += 1
+
+def unique_permutations(A):
+    set_elements = set(A)
+    list_unique = [unique_element(i, A.count(i)) for i in set_elements]
+    u = len(A)
+    return list(permutations(list_unique, [0] * u, u - 1))
