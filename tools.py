@@ -2,7 +2,18 @@
 # Code by David Eppstein, UC Irvine, 28 Feb 2002
 # http://code.activestate.com/recipes/117119/
 
-def gen_primes():
+def gen_primes(n=0):
+    if n == 0:
+        return esieve()
+    else:
+        gen = esieve()
+        primes = [gen.next()]
+        while primes[-1] < n:
+            primes.append(gen.next())
+        return primes
+
+
+def esieve():
     """ Generate an infinite sequence of prime numbers.
     """
     # Maps composites to primes witnessing their compositeness.
@@ -89,3 +100,10 @@ def unique_permutations(A):
     list_unique = [unique_element(i, A.count(i)) for i in set_elements]
     u = len(A)
     return list(permutations(list_unique, [0] * u, u - 1))
+
+def is_pandigital(n):
+    a = sorted(str(n))
+    for i in range(1, 10):
+        if a[i - 1] != str(i):
+            return False
+    return True
