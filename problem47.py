@@ -16,20 +16,30 @@ What is the first of these numbers?"""
 
 from collections import deque
 
-from tools import prime_factors
+from tools import prime_factors, gen_primes
 
-f = 4
-factors = deque(maxlen=f)
-n = 5
-for x in range(f):
-    n += 1
-    d = [a ** b for a, b in prime_factors(n).iteritems()]
-    factors.append(d)
-while True:
+primes = gen_primes(10000)
+def number_factors(n):
+    nod = 0
+    remainder = n
+    for prime in primes:
+        pf = False
+        while remainder % prime == 0:
+            pf = True
+            remainder /= prime
+        nod += 1 if pf else 0
+        if remainder == 1:
+            return nod
+    return nod
+
+n = 1
+num_consec = 0
+test = 4
+while num_consec < test:
     print n
     n += 1
-    new_factors = [a ** b for a, b in prime_factors(n).iteritems()]
-    factors.append(new_factors)
-    if len(factors[0]) == len(factors[1]) == len(factors[2]) == len(factors[3]) == 4:
-        break
-print 'The first number is %s' % (n + 1 - f)
+    if number_factors(n) == test:
+        num_consec += 1
+    else:
+        num_consec = 0
+print 'The first number is %s' % (n - 3)
