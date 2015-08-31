@@ -89,7 +89,7 @@ def permutations(list_unique, result_list, d):
     else:
         for i in list_unique:
             if i.count > 0:
-                result_list[d] = i.value
+                result_list[d] = i._value
                 i.count -= 1
                 for g in permutations(list_unique, result_list, d - 1):
                     yield g
